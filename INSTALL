@@ -1,0 +1,43 @@
+
+1. Настройка CGI
+  vi /etc/httpd/conf.d/cgi-enabled.conf
+  # create new
+  # processes .py as CGI scripts
+  <Directory "/var/www/html/cgi-enabled">
+      Options +ExecCGI
+      AddHandler cgi-script .py
+  </Directory>
+
+  
+  [root@www ~]# chcon -R -t httpd_sys_script_exec_t /var/www/html/cgi-enabled 
+  [root@www ~]# semanage fcontext -a -t httpd_sys_script_exec_t /var/www/html/cgi-enabled 
+  [root@www ~]# vi /var/www/html/cgi-enabled/index.py
+ 
+ #!/usr/bin/python3.6
+
+  print "Content-type: text/html\n\n"
+  print "<html>\n<body>"
+  print "<div style=\"width: 100%; font-size: 40px; font-weight: bold; text-align: center;\">"
+  print "Python Script Test Page"
+  print "</div>\n</body>\n</html>"
+
+  [root@www ~]# chmod 705 /var/www/html/cgi-enabled/index.py 
+  
+  2. Проверяем, что работает тестовый скрипт.
+  
+  3. в /etc/httpd/conf/httpd.conf добавляем:
+    AddDefaultCharset UTF-8
+    SetEnv PYTHONIOENCODING utf8
+    TimeOut 240
+  
+  4. Заходим в папку, где у нас будут лежать cgi скрипт
+  5. Устанавливаем git,python3.6
+  6. Скачиваем репозиторий git clone https://github.com/jirenz747/isp_test_from_html.git
+  7. Устанавливаем необходимые дополниетльные модули 
+      pip install pexpect
+      pip install xlrd
+  8. Изменяем переменные в файле passwords.py
+  9. Помещаем файл Network_no_pass.xlsx в каталог со скриптом.
+  10. перемещаем файл testing_isp.php в каталог веб страниц /var/www/html/
+  
+    

@@ -3,7 +3,6 @@ import re
 from connecting_devices import command_send
 from connecting_devices import connect_cisco_router
 from passwords import get_ip_address
-from passwords import get_service_desc_password
 from excel import get_isp_provider
 from excel import get_list_object
 from excel import exist_object
@@ -33,7 +32,6 @@ TRACEROUTE_TTL = 5  # TTL при проверке traceroute
 INTERFACE_RATE = 800 # Какая допустимая загрузка канала(Kbit), после которого срабатывает сбор статистики sh ip top talkers
 
 IP_COD_BEELINE, IP_COD_PROSTOR, IP_COD_DOMRU, IP_COD_INET = get_ip_address()
-SERVICE_LOGIN, SERVICE_PASS = get_service_desc_password()
 
 # Глобальные переменныеTimeout waiting for output from CGI script
 t = None  # Переменная для подключения к оборудованию.
